@@ -1,0 +1,182 @@
+.fcp-comments { display:block; margin-top:18px; color:var(--color-text-primary,#22252a); font-size:14px; }
+.fcp-comments__heading { display:flex; align-items:center; min-height:44px; padding:0 12px; border:1px solid var(--color-border-section,#edf0f5); border-radius:8px; background:var(--color-bg-section,#fff); }
+.fcp-comments__title { display:inline-flex; align-items:center; flex:1; min-width:0; font-size:16px; font-weight:600; }
+.fcp-comments__title::before { content:''; width:11px; height:11px; margin-right:10px; border-radius:50%; background:#222; box-shadow:7px 0 0 rgba(34,34,34,.35); }
+.fcp-comments__count { margin-left:4px; color:var(--color-text-secondary,#8b919b); font-size:13px; font-weight:400; }
+.fcp-comments__actions { display:flex; align-items:center; gap:6px; }
+.fcp-comments__action { border:0; padding:5px 9px; border-radius:6px; background:var(--color-bg-page,#f5f7fa); color:var(--color-text-secondary,#737984); cursor:pointer; font:inherit; font-size:13px; }
+.fcp-comments__action:hover { color:#222; }
+.fcp-comments__body { max-height:220px; margin-top:8px; padding-right:5px; overflow:auto; overscroll-behavior:contain; scrollbar-width:thin; scrollbar-color:#222 transparent; }
+.fcp-comments__body[hidden] { display:none; }
+.fcp-comments__status { padding:12px 14px; border-radius:7px; background:var(--color-bg-page,#f6f8fb); color:var(--color-text-secondary,#858b95); line-height:1.6; }
+.fcp-comments__list { display:grid; gap:1px; margin:0; padding:0; list-style:none; }
+.fcp-comment { display:flex; align-items:flex-start; gap:14px; padding:5px 4px; border:0; border-radius:0; background:transparent; }
+.fcp-comment__text { flex:1; min-width:0; margin:0; color:inherit; line-height:1.65; white-space:pre-wrap; word-break:break-word; }
+.fcp-comment__meta { display:flex; flex:0 0 auto; align-items:center; gap:8px; padding-top:2px; color:#222; font-size:12px; line-height:1.6; white-space:nowrap; }
+.fcp-comment__meta span + span::before { content:'·'; margin-right:8px; color:#222; }
+.fcp-comment__meta .fcp-comment__rating { color:#222; }
+.fcp-hide-video { display:none !important; }
+
+/* 页面黑白：不对 body 使用 filter，避免改变 position:fixed 元素的定位上下文。 */
+html.kakaoracle-monochrome body,
+html.kakaoracle-monochrome body * {
+  color: #000 !important;
+  border-color: #000 !important;
+  background-color: #fff !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+html.kakaoracle-monochrome body img,
+html.kakaoracle-monochrome body video,
+html.kakaoracle-monochrome body canvas {
+  filter: grayscale(1) !important;
+}
+html.kakaoracle-monochrome body svg,
+html.kakaoracle-monochrome body svg * {
+  color: #000 !important;
+  fill: #000 !important;
+  stroke: #000 !important;
+}
+html.kakaoracle-monochrome body button,
+html.kakaoracle-monochrome body [role="button"],
+html.kakaoracle-monochrome body [class*="icon"],
+html.kakaoracle-monochrome body [class*="Icon"] {
+  color: #000 !important;
+}
+html.kakaoracle-monochrome body button svg,
+html.kakaoracle-monochrome body [role="button"] svg,
+html.kakaoracle-monochrome body [class*="icon"] svg,
+html.kakaoracle-monochrome body [class*="Icon"] svg {
+  fill: #000 !important;
+  stroke: #000 !important;
+}
+
+/* CSDN 一键美化：只处理结构和布局，不改变页面颜色。 */
+html.kakaoracle-csdn-beautify .blog_container_aside,
+html.kakaoracle-csdn-beautify #asideProfile,
+html.kakaoracle-csdn-beautify #asideHotArticle,
+html.kakaoracle-csdn-beautify #asideArchiveNew,
+html.kakaoracle-csdn-beautify #rightAside,
+html.kakaoracle-csdn-beautify #recommend-right,
+html.kakaoracle-csdn-beautify #sidecolumn-deepseek,
+html.kakaoracle-csdn-beautify #toolBarBox,
+html.kakaoracle-csdn-beautify #commentSideBoxshadow,
+html.kakaoracle-csdn-beautify [id^="kp_box_"],
+html.kakaoracle-csdn-beautify [id^="dmp_ad_"],
+html.kakaoracle-csdn-beautify .recommend-box.insert-baidu-box,
+html.kakaoracle-csdn-beautify .csdn-new-user-gift-bubble {
+  display: none !important;
+}
+html.kakaoracle-csdn-beautify .csdn-side-toolbar,
+html.kakaoracle-csdn-beautify .toolbar-container {
+  display: none !important;
+}
+html.kakaoracle-csdn-beautify .blog-content-box {
+  float: none !important;
+  width: min(1010px, calc(100vw - 32px)) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+html[data-csdn-position="left"] .blog-content-box { margin-left: 0 !important; margin-right: auto !important; }
+html[data-csdn-position="center"] .blog-content-box { margin-left: auto !important; margin-right: auto !important; }
+html[data-csdn-position="right"] .blog-content-box { margin-left: auto !important; margin-right: 0 !important; }
+html[data-csdn-position="left"] .main_father { justify-content: flex-start !important; }
+html[data-csdn-position="left"] #mainBox,
+html[data-csdn-position="left"] #mainBox > .container.clearfix {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+html[data-csdn-position="left"] #mainBox > main {
+  float: left !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+html[data-csdn-position="center"] .main_father { justify-content: center !important; }
+html[data-csdn-position="center"] #mainBox > main {
+  float: none !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+html[data-csdn-position="right"] .main_father { justify-content: flex-end !important; }
+html[data-csdn-position="right"] #mainBox > main {
+  float: right !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+html.kakaoracle-csdn-beautify .container.clearfix {
+  width: 100% !important;
+  max-width: 1318px !important;
+}
+html.kakaoracle-csdn-monochrome,
+html.kakaoracle-csdn-monochrome body,
+html.kakaoracle-csdn-monochrome body * {
+  color: #000 !important;
+  background-color: #fff !important;
+  background-image: none !important;
+  border-color: #000 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+html.kakaoracle-csdn-monochrome body img,
+html.kakaoracle-csdn-monochrome body video,
+html.kakaoracle-csdn-monochrome body canvas,
+html.kakaoracle-csdn-monochrome body svg,
+html.kakaoracle-csdn-monochrome body svg * {
+  filter: grayscale(1) !important;
+  fill: #000 !important;
+  stroke: #000 !important;
+}
+
+/* 知乎只展示评论：移除顶部导航、右侧作者/热榜栏和悬浮助手，保留问题与回答主体。 */
+html.kakaoracle-zhihu-comments-only .AppHeader,
+html.kakaoracle-zhihu-comments-only .Question-sideColumn,
+html.kakaoracle-zhihu-comments-only .Question-sideColumnAdContainer,
+html.kakaoracle-zhihu-comments-only .CornerButtons {
+  display: none !important;
+}
+html.kakaoracle-zhihu-comments-only .Question-mainColumn {
+  width: min(1000px, calc(100vw - 32px)) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* 知乎黑白：不对 body 使用 filter，避免破坏底部固定操作条定位。 */
+html.kakaoracle-zhihu-monochrome,
+html.kakaoracle-zhihu-monochrome body,
+html.kakaoracle-zhihu-monochrome body * {
+  color: #000 !important;
+  background-color: #fff !important;
+  border-color: #000 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+html.kakaoracle-zhihu-monochrome body img,
+html.kakaoracle-zhihu-monochrome body video,
+html.kakaoracle-zhihu-monochrome body canvas,
+html.kakaoracle-zhihu-monochrome body svg,
+html.kakaoracle-zhihu-monochrome body svg * {
+  filter: grayscale(1) !important;
+  fill: #000 !important;
+  stroke: #000 !important;
+}
+
+/* 通用黑白：只作用于未被专门适配的网站，避免覆盖粉笔、CSDN、知乎各自的开关。 */
+html.kakaoracle-common-monochrome,
+html.kakaoracle-common-monochrome body,
+html.kakaoracle-common-monochrome body * {
+  color: #000 !important;
+  background-color: #fff !important;
+  border-color: #000 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+html.kakaoracle-common-monochrome body img,
+html.kakaoracle-common-monochrome body video,
+html.kakaoracle-common-monochrome body canvas,
+html.kakaoracle-common-monochrome body svg,
+html.kakaoracle-common-monochrome body svg * {
+  filter: grayscale(1) !important;
+  fill: #000 !important;
+  stroke: #000 !important;
+}
+@media (max-width:760px) { .fcp-comment { display:block; } .fcp-comment__meta { margin-top:5px; flex-wrap:wrap; white-space:normal; } }

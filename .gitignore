@@ -1,0 +1,8 @@
+# Codex 接手资料：只在本地维护，不上传 GitHub
+/agents/
+/AGENTS.md
+
+# 系统与编辑器文件
+.DS_Store
+.vscode/
+.idea/

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>kakaoracle</title><link rel="stylesheet" href="popup.css"></head>
+<body>
+<main class="popup">
+  <header class="popup__header"><h1>kakaoracle</h1></header>
+  <section class="feature feature--top" data-group="style"><div class="feature__copy"><strong>style 样式</strong></div><label class="switch"><input id="style-enabled" type="checkbox"><span class="switch__track"></span></label><button class="feature__collapse" data-collapse="style" type="button">＋</button></section>
+  <section class="feature feature--second" data-group="fenbi" data-parent="style" hidden><div class="feature__copy"><strong>粉笔</strong></div><label class="switch"><input id="fenbi-enabled" type="checkbox"><span class="switch__track"></span></label><button class="feature__collapse" data-collapse="fenbi" type="button">＋</button></section>
+  <section class="feature feature--third" data-parent="fenbi" hidden><div class="feature__copy"><strong>显示评论</strong></div><label class="switch"><input id="comments-enabled" type="checkbox"><span class="switch__track"></span></label></section>
+  <section class="feature feature--third" data-parent="fenbi" hidden><div class="feature__copy"><strong>隐藏解析视频</strong></div><label class="switch"><input id="hide-video-enabled" type="checkbox"><span class="switch__track"></span></label></section>
+  <section class="feature feature--third" data-parent="fenbi" hidden><div class="feature__copy"><strong>页面黑白</strong></div><label class="switch"><input id="monochrome-enabled" type="checkbox"><span class="switch__track"></span></label></section>
+  <section class="feature feature--second" data-group="csdn" data-parent="style" hidden><div class="feature__copy"><strong>CSDN</strong></div><label class="switch"><input id="csdn-enabled" type="checkbox"><span class="switch__track"></span></label><button class="feature__collapse" data-collapse="csdn" type="button">＋</button></section>
+  <section class="feature feature--third" data-parent="csdn" hidden><div class="feature__copy"><strong>只展示博文</strong></div><label class="switch"><input id="csdn-beautify-enabled" type="checkbox"><span class="switch__track"></span></label></section>
+  <section class="feature feature--third" data-parent="csdn" hidden><div class="feature__copy"><strong>一键黑白</strong></div><label class="switch"><input id="csdn-monochrome-enabled" type="checkbox"><span class="switch__track"></span></label></section>
+  <section class="feature feature--third" data-parent="csdn" hidden><div class="feature__copy"><strong>内容位置</strong></div><select id="csdn-position"><option value="left">偏左</option><option value="center">居中</option><option value="right">偏右</option></select></section>
+  <section class="feature feature--second" data-group="zhihu" data-parent="style" hidden><div class="feature__copy"><strong>知乎</strong></div><label class="switch"><input id="zhihu-enabled" type="checkbox"><span class="switch__track"></span></label><button class="feature__collapse" data-collapse="zhihu" type="button">＋</button></section>
+  <section class="feature feature--third" data-parent="zhihu" hidden><div class="feature__copy"><strong>只展示评论</strong></div><label class="switch"><input id="zhihu-comments-enabled" type="checkbox"><span class="switch__track"></span></label></section>
+  <section class="feature feature--third" data-parent="zhihu" hidden><div class="feature__copy"><strong>一键黑白</strong></div><label class="switch"><input id="zhihu-monochrome-enabled" type="checkbox"><span class="switch__track"></span></label></section>
+  <section class="feature feature--second" data-group="common" data-parent="style" hidden><div class="feature__copy"><strong>通用</strong></div><label class="switch"><input id="common-enabled" type="checkbox"><span class="switch__track"></span></label><button class="feature__collapse" data-collapse="common" type="button">＋</button></section>
+  <section class="feature feature--third" data-parent="common" hidden><div class="feature__copy"><strong>一键黑白</strong></div><label class="switch"><input id="common-monochrome-enabled" type="checkbox"><span class="switch__track"></span></label></section>
+  <section class="feature feature--top" data-group="frontend"><div class="feature__copy"><strong>前端</strong></div><label class="switch"><input id="frontend-enabled" type="checkbox"><span class="switch__track"></span></label><button class="feature__collapse" data-collapse="frontend" type="button">＋</button></section>
+  <section class="feature feature--second" data-group="json" data-parent="frontend" hidden><div class="feature__copy"><strong>JSON 美化</strong></div><label class="switch"><input id="json-enabled" type="checkbox"><span class="switch__track"></span></label></section>
+</main>
+<script src="popup.js"></script>
+</body></html>
