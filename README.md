@@ -2,52 +2,34 @@
 
 > 给网页加一点魔法，让信息回到它该在的位置。
 
-![Manifest V3](https://img.shields.io/badge/Chrome-Manifest%20V3-111111?style=flat-square&logo=googlechrome&logoColor=white)
-![Version](https://img.shields.io/badge/version-0.10.1-111111?style=flat-square)
+![Chrome](https://img.shields.io/badge/Chrome-Manifest%20V3-111111?style=flat-square&logo=googlechrome&logoColor=white)
+![Mood](https://img.shields.io/badge/mood-quietly%20powerful-111111?style=flat-square)
 ![License](https://img.shields.io/badge/license-MIT-111111?style=flat-square)
-![No build](https://img.shields.io/badge/build-none-111111?style=flat-square)
 
-一个轻量、零构建依赖的 Chrome 网页增强扩展。它把常用网站整理成更清爽、更专注的阅读体验：粉笔、CSDN、知乎，以及一个独立的 JSON 美化工具。
+一个安静但有点酷的网页增强工具。
 
-## ✨ 能做什么
+它把纷杂的页面轻轻整理一下，让评论更容易被看见，让正文回到舞台中央，让颜色在需要的时候退场，也藏着一个随手打开的 JSON 小工具。
 
-### style 样式
+## ✨ 小小能力
 
-| 网站 | 能力 |
+| 场景 | 体验 |
 | --- | --- |
-| 粉笔 | 显示题友评论、隐藏解析视频、黑白阅读 |
-| CSDN | 只展示博文、黑白阅读、内容位置调整 |
-| 知乎 | 只展示评论、黑白阅读 |
-| 通用 | 尝试对其他网页启用黑白阅读 |
+| 粉笔 | 评论、清爽阅读、视频隐藏 |
+| CSDN | 博文聚焦、版面整理、黑白阅读 |
+| 知乎 | 评论聚焦、黑白阅读 |
+| 其他网页 | 尝试开启通用黑白阅读 |
+| JSON | 格式化、压缩、复制、树形查看 |
 
-### 前端
+## 🌙 使用它
 
-- **JSON 美化**：从扩展弹窗开启后自动打开独立页面。
-- 支持格式化、压缩、复制、树形查看与节点折叠。
+打开扩展面板，像打开一枚小型控制台一样，按需展开功能。每个网站都有自己的开关，互不打扰。
 
-## 🚀 安装
+## 🎨 风格
 
-1. 打开 Chrome 的 `chrome://extensions/`。
-2. 开启右上角“开发者模式”。
-3. 点击“加载已解压的扩展程序”。
-4. 选择本目录，安装后刷新目标页面。
+少一点喧闹，多一点留白；少一点干扰，多一点专注。
 
-扩展复用浏览器现有登录会话，不读取、保存、打印或手动转发账号 Cookie。
-
-## 🧭 使用方式
-
-点击工具栏中的扩展图标，在树形面板中展开 `style 样式` 或 `前端`，按需打开功能。网站之间的开关彼此隔离；关闭上级开关即可停用该组能力。
-
-## 🛠️ 开发
-
-项目无需构建步骤，直接编辑源文件即可。修改后重新加载扩展并刷新目标网页。
-
-版本使用 `0.x.y`：`x` 为 `1–100`，`y` 为 `1–10`。
-
-## 📜 许可证
+## 📜 License
 
 [MIT License](./LICENSE)
 
-使用粉笔、CSDN、知乎等网站时，请遵守对应网站的服务条款、版权规则和接口政策。
-
-<p align="center">Made with ☕ · keep it simple · keep it useful</p>
+<p align="center">Made with ☕ · a little magic for everyday pages</p>
