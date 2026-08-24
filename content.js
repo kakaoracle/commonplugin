@@ -4,7 +4,7 @@ const PANEL_ATTR = 'data-fcp-comments';
 const PAGE_SIZE = 30;
 const MAX_PAGES = 2;
 const questionIdMapCache = new Map();
-let settings = { fenbiEnabled:true, commentsEnabled:true, hideVideo:false, monochrome:false, csdnEnabled:true, csdnBeautify:true, csdnMonochrome:false, csdnPosition:'center', zhihuEnabled:true, zhihuComments:true, zhihuMonochrome:false, commonEnabled:true, commonMonochrome:false };
+let settings = { fenbiEnabled:true, forceCommentsEnabled:false, hideVideo:false, monochrome:false, csdnEnabled:true, csdnBeautify:true, csdnMonochrome:false, csdnPosition:'center', zhihuEnabled:true, zhihuComments:true, zhihuMonochrome:false, commonEnabled:true, commonMonochrome:false };
 
 function isCsdnPage() {
   return location.hostname === 'blog.csdn.net';
@@ -20,8 +20,8 @@ function isFenbiSolutionPage() {
 
 function isCommentEnhancementPage() {
   // 粉笔绝大多数页面已有原生评论，扩展绝不干预。
-  // 只有解析页存在被隐藏的评论入口，才由“显示评论”开关注入面板。
-  return isFenbiSolutionPage();
+  // 仅在解析、记忆这两类原生未展示评论的页面由“强开评论”补充面板。
+  return isFenbiSolutionPage() || (location.hostname === 'spa.fenbi.com' && /^\/ti\/memorize\//.test(location.pathname));
 }
 
 function isZhihuPage() {
@@ -56,7 +56,7 @@ async function requestJson(url) {
 }
 
 function currentExerciseParams() {
-  const match = location.pathname.match(/^\/ti\/exam\/solution\/([^/]+)/);
+  const match = location.pathname.match(/^\/ti\/(?:exam\/solution|memorize)\/([^/]+)/);
   if (!match) return null;
   const query = new URLSearchParams(location.search);
   return {
@@ -235,7 +235,7 @@ function createPanel(questionKey) {
 }
 
 function enhanceQuestions() {
-  if (!isCommentEnhancementPage() || !settings.fenbiEnabled || !settings.commentsEnabled) return;
+  if (!isCommentEnhancementPage() || !settings.fenbiEnabled || !settings.forceCommentsEnabled) return;
   for (const question of document.querySelectorAll('app-ti[data-question-key]')) {
     const questionKey=question.getAttribute('data-question-key');
     if (!questionKey || question.querySelector(`[${PANEL_ATTR}]`)) continue;
@@ -309,15 +309,15 @@ function removePanels() {
 
 chrome.storage.sync.get(settings,result=>{
   settings={...settings,...result};
-  if (settings.fenbiEnabled && settings.commentsEnabled) enhanceQuestions();
+  if (settings.fenbiEnabled && settings.forceCommentsEnabled) enhanceQuestions();
   applyAllFeatures();
 });
 
 chrome.storage.onChanged.addListener((changes,areaName)=>{
   if (areaName!=='sync') return;
-  for (const key of ['fenbiEnabled','commentsEnabled','hideVideo','monochrome','csdnEnabled','csdnBeautify','csdnMonochrome','csdnPosition','zhihuEnabled','zhihuComments','zhihuMonochrome','commonEnabled','commonMonochrome']) {
+  for (const key of ['fenbiEnabled','forceCommentsEnabled','hideVideo','monochrome','csdnEnabled','csdnBeautify','csdnMonochrome','csdnPosition','zhihuEnabled','zhihuComments','zhihuMonochrome','commonEnabled','commonMonochrome']) {
     if (changes[key]) settings[key]=changes[key].newValue;
   }
-  if (!settings.fenbiEnabled || !settings.commentsEnabled) removePanels(); else enhanceQuestions();
+  if (!settings.fenbiEnabled || !settings.forceCommentsEnabled) removePanels(); else enhanceQuestions();
   applyAllFeatures();
 });
