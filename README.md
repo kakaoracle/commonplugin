@@ -4,7 +4,7 @@
 
 <img src="https://readme-typing-svg.demolab.com?font=M+PLUS+1p:wght@700&size=26&pause=1200&color=C7B9FF&center=true&vCenter=true&width=560&lines=%E6%8A%8A%E8%AF%84%E8%AE%BA%E8%AF%B7%E5%9B%9E%E6%9D%A5%EF%BC%8C%E6%8A%8A%E5%96%A7%E5%9A%A3%E8%AF%B7%E5%87%BA%E5%8E%BB;%E4%BA%8E%E9%A1%B5%E9%9D%A2%E7%9A%84%E8%A4%B6%E7%9A%B1%E9%87%8C%E6%82%84%E6%BD%9C%E6%96%BD%E9%AD%94%E6%B3%95;+%E7%81%B0%E5%A7%91%E5%A8%98%E4%B8%8D%E6%89%AB%E7%9A%84%E7%81%B0%E5%9F%83+%E7%94%B1%E6%88%91%E4%BB%AC%E6%9D%A5%E6%89%AB;+%E6%AD%A4%E7%BB%93%E7%95%8C%E5%B8%B8%E5%B9%B4%E8%90%A5%E4%B8%9A+%E6%AC%A2%E8%BF%8E%E5%85%89%E4%B8%B6+" alt="typing" />
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:B8A7E8,50:9FD8F5,100:D4F0C0&height=120&section=header&text=fenbi-helper&fontSize=34&fontColor=ffffff&animation=fadeIn&fontAlignY=65" alt="banner" width="100%" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:B8A7E8,50:9FD8F5,100:D4F0C0&height=120&section=header&text=commonplugin&fontSize=34&fontColor=ffffff&animation=fadeIn&fontAlignY=65" alt="banner" width="100%" />
 
 ![Chrome](https://img.shields.io/badge/Chrome-MV3-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/%E5%92%92%E6%96%87-JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
@@ -63,8 +63,8 @@
 
 <div align="center">
 
-<a href="https://github.com/kakaoracle/fenbi-helper">
-  <img src="https://github-readme-stats.vercel.app/api/pin/?username=kakaoracle&repo=fenbi-helper&theme=tokyonight&hide_border=true" />
+<a href="https://github.com/kakaoracle/commonplugin">
+  <img src="https://github-readme-stats.vercel.app/api/pin/?username=kakaoracle&repo=commonplugin&theme=tokyonight&hide_border=true" />
 </a>
 <br/>
 <img src="https://streak-stats.demolab.com?user=kakaoracle&theme=tokyonight&hide_border=true&locale=zh_Hans" height="165" />
@@ -85,7 +85,7 @@
 4. 回到任一网页刷新 —— 魔法开始渗透
 ```
 
-油猴旅人可携带 `fenbi-chrome-plus.user.js` 单独出发。
+油猴旅人可携带 `commonplugin.user.js` 单独出发。
 
 *温柔提醒：扫帚只借用你已打开的门，从不偷配钥匙（复用现有登录会话，不读取、不保存任何 Cookie）。*
 

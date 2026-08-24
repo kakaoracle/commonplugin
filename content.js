@@ -192,7 +192,7 @@ async function loadQuestionIdMap() {
     if (deviceId) url.searchParams.set('deviceId',deviceId);
     const solutionPayload = await requestJson(url.href);
     const solution = solutionPayload?.data ?? solutionPayload;
-    return {map:await mapFromLegacyReport(solution,params),strategy:'fenbi-helper-report'};
+    return {map:await mapFromLegacyReport(solution,params),strategy:'commonplugin-legacy-report'};
   })();
   questionIdMapCache.set(cacheKey,loading);
   try { return await loading; } catch (error) { questionIdMapCache.delete(cacheKey); throw error; }
