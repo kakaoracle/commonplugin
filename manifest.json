@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "kakaoracle",
-  "version": "0.10.5",
+  "version": "0.10.6",
   "description": "kakaoracle：粉笔、CSDN、知乎页面增强与 JSON 美化工具。",
   "permissions": [
     "storage"

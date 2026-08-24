@@ -108,12 +108,83 @@ async function mapFromLegacyReport(solution,params) {
   return validateQuestionMap(result);
 }
 
+function normalizeStaticUrls(staticUrl, routecs) {
+  const urls = Array.isArray(staticUrl?.urls) ? staticUrl.urls : [];
+  if (!urls.length) throw new Error('练习数据未返回题目静态数据地址');
+  return urls.map((value) => {
+    const url = new URL(value, 'https://tiku.fenbi.com');
+    // 粉笔页面自身也会为 type=1 的静态题目请求补上这两个参数。
+    // 记忆页对应的展示类型固定为 1（Memorize）。
+    if (Number(staticUrl?.type) === 1) {
+      url.searchParams.set('routecs', routecs);
+      url.searchParams.set('type', '1');
+    }
+    return url.href;
+  });
+}
+
+function questionIdFromStaticQuestion(question) {
+  const candidates = [
+    question?.id,
+    question?.questionId,
+    question?.question?.id,
+    question?.question?.questionId,
+    question?.originQuestion?.id,
+  ];
+  for (const value of candidates) {
+    const id = Number(value);
+    if (Number.isSafeInteger(id) && id > 0) return id;
+  }
+  return null;
+}
+
+function mapFromMemorizeStatic(payloads) {
+  const questions = payloads.flatMap((payload) => {
+    const data = payload?.data ?? payload;
+    return data?.solutions ?? data?.questions ?? [];
+  });
+  if (!questions.length) throw new Error('题目静态数据中没有题目列表');
+
+  const result = new Map();
+  for (const question of questions) {
+    const key = question?.globalId ?? question?.questionKey ?? question?.key;
+    const id = questionIdFromStaticQuestion(question);
+    if (key && id) result.set(String(key), id);
+  }
+
+  // 静态数据没有键时，粉笔的题目顺序与页面渲染顺序一致；仅在数量完全一致时才使用此兜底，
+  // 避免把评论贴到错误题目上。
+  const keys = pageQuestionKeys();
+  if (result.size === 0 && questions.length === keys.length) {
+    questions.forEach((question, index) => {
+      const id = questionIdFromStaticQuestion(question);
+      if (id) result.set(keys[index], id);
+    });
+  }
+  return validateQuestionMap(result);
+}
+
+async function mapFromMemorizeExercise(params) {
+  const url = new URL('https://tiku.fenbi.com/combine/exercise/getExercise');
+  for (const [key,value] of Object.entries({format:'html',key:params.key,routecs:params.routecs,kav:'125',av:'127',hav:'125',app:'web',apcid:'0',gav:'2'})) url.searchParams.set(key,value);
+  const deviceId = localStorage.getItem('deviceSid');
+  if (deviceId) url.searchParams.set('deviceId',deviceId);
+  const exercisePayload = await requestJson(url.href);
+  const exercise = exercisePayload?.data ?? exercisePayload;
+  const staticUrls = normalizeStaticUrls(exercise?.staticUrl, params.routecs);
+  const staticPayloads = await Promise.all(staticUrls.map(requestJson));
+  return mapFromMemorizeStatic(staticPayloads);
+}
+
 async function loadQuestionIdMap() {
   const params = currentExerciseParams();
   if (!params) throw new Error('当前页面不是练习解析页');
   const cacheKey = `${params.routecs}:${params.key}:${params.examcatid}`;
   if (questionIdMapCache.has(cacheKey)) return questionIdMapCache.get(cacheKey);
   const loading = (async()=>{
+    if (/^\/ti\/memorize\//.test(location.pathname)) {
+      return {map:await mapFromMemorizeExercise(params),strategy:'fenbi-memorize-static'};
+    }
     const url = new URL('https://tiku.fenbi.com/combine/exercise/getSolution');
     for (const [key,value] of Object.entries({format:'html',key:params.key,routecs:params.routecs,kav:'125',av:'127',hav:'125',app:'web',apcid:'0',gav:'2'})) url.searchParams.set(key,value);
     if (params.examcatid) url.searchParams.set('examcatid',params.examcatid);
