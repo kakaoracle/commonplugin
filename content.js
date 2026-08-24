@@ -18,12 +18,10 @@ function isFenbiSolutionPage() {
   return location.hostname === 'spa.fenbi.com' && /^\/ti\/exam\/solution\//.test(location.pathname);
 }
 
-function isFenbiMemorizePage() {
-  return location.hostname === 'spa.fenbi.com' && /^\/ti\/memorize\//.test(location.pathname);
-}
-
 function isCommentEnhancementPage() {
-  return isFenbiSolutionPage() || isFenbiMemorizePage();
+  // 粉笔绝大多数页面已有原生评论，扩展绝不干预。
+  // 只有解析页存在被隐藏的评论入口，才由“显示评论”开关注入面板。
+  return isFenbiSolutionPage();
 }
 
 function isZhihuPage() {
@@ -58,16 +56,13 @@ async function requestJson(url) {
 }
 
 function currentExerciseParams() {
-  const solutionMatch = location.pathname.match(/^\/ti\/exam\/solution\/([^/]+)/);
-  const memorizeMatch = location.pathname.match(/^\/ti\/memorize\/([^/]+)/);
-  const match = solutionMatch || memorizeMatch;
+  const match = location.pathname.match(/^\/ti\/exam\/solution\/([^/]+)/);
   if (!match) return null;
   const query = new URLSearchParams(location.search);
   return {
     key:decodeURIComponent(match[1]),
     routecs:query.get('routecs')||'xingce',
     examcatid:query.get('examcatid')||'',
-    route:solutionMatch ? 'solution' : 'memorize',
   };
 }
 
@@ -113,45 +108,12 @@ async function mapFromLegacyReport(solution,params) {
   return validateQuestionMap(result);
 }
 
-function mapQuestionIdsFromAnswers(exercise) {
-  const pageKeys = pageQuestionKeys();
-  const pageKeySet = new Set(pageKeys);
-  const answers = exercise?.userAnswers ?? {};
-  const directMap = new Map();
-
-  for (const [questionKey, answer] of Object.entries(answers)) {
-    const questionId = Number(answer?.questionId);
-    if (pageKeySet.has(questionKey) && Number.isSafeInteger(questionId) && questionId > 0) {
-      directMap.set(questionKey, questionId);
-    }
-  }
-  if (directMap.size === pageKeys.length) return validateQuestionMap(directMap);
-
-  const ids = collectLegacyQuestionIds(exercise, null);
-  if (ids.length < pageKeys.length) {
-    throw new Error(`记忆页练习数据只有 ${ids.length}/${pageKeys.length} 个题目 ID`);
-  }
-  return validateQuestionMap(new Map(pageKeys.map((key,index)=>[key,ids[index]])));
-}
-
-async function mapFromMemorizeExercise(params) {
-  const url = new URL('https://tiku.fenbi.com/tiku/_tiku_/exercise/getExercise');
-  url.searchParams.set('format','html');
-  url.searchParams.set('key',params.key);
-  url.searchParams.set('routecs',params.routecs);
-  const payload = await requestJson(url.href);
-  return mapQuestionIdsFromAnswers(payload?.data ?? payload);
-}
-
 async function loadQuestionIdMap() {
   const params = currentExerciseParams();
   if (!params) throw new Error('当前页面不是练习解析页');
-  const cacheKey = `${params.route}:${params.routecs}:${params.key}:${params.examcatid}`;
+  const cacheKey = `${params.routecs}:${params.key}:${params.examcatid}`;
   if (questionIdMapCache.has(cacheKey)) return questionIdMapCache.get(cacheKey);
   const loading = (async()=>{
-    if (params.route === 'memorize') {
-      return {map:await mapFromMemorizeExercise(params),strategy:'fenbi-memorize-exercise'};
-    }
     const url = new URL('https://tiku.fenbi.com/combine/exercise/getSolution');
     for (const [key,value] of Object.entries({format:'html',key:params.key,routecs:params.routecs,kav:'125',av:'127',hav:'125',app:'web',apcid:'0',gav:'2'})) url.searchParams.set(key,value);
     if (params.examcatid) url.searchParams.set('examcatid',params.examcatid);
