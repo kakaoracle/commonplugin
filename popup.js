@@ -28,7 +28,13 @@ function render(s){
     const input=section.querySelector('input,select');if(input)input.disabled=!parentOn;
   }
 }
-function save(k,v){chrome.storage.sync.set({[k]:v})}
+function save(k,v){
+  chrome.storage.sync.set({[k]:v},()=>{
+    // 清除早期错误状态键，避免旧值在后续弹窗加载时干扰规范状态。
+    if(k==='monochrome') chrome.storage.sync.remove('monochromeEnabled');
+    if(k==='hideVideo') chrome.storage.sync.remove('videoEnabled');
+  });
+}
 function updateCollapse(key,collapsed){chrome.storage.sync.get({collapsedGroups:{}},r=>chrome.storage.sync.set({collapsedGroups:{...(r.collapsedGroups||{}),[key]:collapsed}}))}
 function descendants(key){return [...document.querySelectorAll(`[data-parent="${key}"]`)]}
 function loadSettings(){

@@ -248,6 +248,7 @@ function applyMonochrome() {
     'kakaoracle-fenbi-guide-monochrome',
     active && location.pathname.startsWith('/spa/tiku/guide/')
   );
+  root.dataset.kakaoracleMonochrome = active ? 'on' : 'off';
 }
 
 function applyCsdnBeautify() {
@@ -267,6 +268,8 @@ function applyCommonMonochrome() {
 }
 
 function applyAllFeatures() {
+  // 无视觉副作用的运行标记：用于确认内容脚本已在粉笔页面执行。
+  document.documentElement.dataset.kakaoracleFenbiRuntime = isFenbiPage() ? 'ready' : '';
   applyVideoVisibility();
   applyMonochrome();
   applyCsdnBeautify();
