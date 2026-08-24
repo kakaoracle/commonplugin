@@ -8,6 +8,7 @@
   ],
   "host_permissions": [
     "https://spa.fenbi.com/*",
+    "https://www.fenbi.com/*",
     "https://blog.csdn.net/*",
     "https://www.zhihu.com/*",
     "https://tiku.fenbi.com/*",

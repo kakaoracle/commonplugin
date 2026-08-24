@@ -11,7 +11,7 @@ function isCsdnPage() {
 }
 
 function isFenbiPage() {
-  return location.hostname === 'spa.fenbi.com';
+  return location.hostname === 'spa.fenbi.com' || location.hostname === 'www.fenbi.com';
 }
 
 function isZhihuPage() {
@@ -236,7 +236,18 @@ function applyVideoVisibility() {
 }
 
 function applyMonochrome() {
-  document.documentElement.classList.toggle('kakaoracle-monochrome', Boolean(isFenbiPage() && settings.fenbiEnabled && settings.monochrome));
+  const active = Boolean(isFenbiPage() && settings.fenbiEnabled && settings.monochrome);
+  const root = document.documentElement;
+
+  // 第一层：粉笔全站共享黑白基线。
+  root.classList.toggle('kakaoracle-monochrome', active);
+
+  // 第二层：粉笔不同 SPA 路由的局部补丁。新增路由时只在这里登记，
+  // 不改变共享开关，也不影响其他网站。
+  root.classList.toggle(
+    'kakaoracle-fenbi-guide-monochrome',
+    active && location.pathname.startsWith('/spa/tiku/guide/')
+  );
 }
 
 function applyCsdnBeautify() {

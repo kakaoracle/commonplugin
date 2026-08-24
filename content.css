@@ -19,10 +19,13 @@
 
 /* 页面黑白：不对 body 使用 filter，避免改变 position:fixed 元素的定位上下文。 */
 html.kakaoracle-monochrome body,
-html.kakaoracle-monochrome body * {
+html.kakaoracle-monochrome body *,
+html.kakaoracle-monochrome body *::before,
+html.kakaoracle-monochrome body *::after {
   color: #000 !important;
   border-color: #000 !important;
   background-color: #fff !important;
+  background-image: none !important;
   box-shadow: none !important;
   text-shadow: none !important;
 }
@@ -49,6 +52,16 @@ html.kakaoracle-monochrome body [class*="icon"] svg,
 html.kakaoracle-monochrome body [class*="Icon"] svg {
   fill: #000 !important;
   stroke: #000 !important;
+}
+
+/* 粉笔题库目录页补丁：该路由的应用容器与装饰层会各自绘制背景。 */
+html.kakaoracle-fenbi-guide-monochrome,
+html.kakaoracle-fenbi-guide-monochrome body,
+html.kakaoracle-fenbi-guide-monochrome #app,
+html.kakaoracle-fenbi-guide-monochrome #root,
+html.kakaoracle-fenbi-guide-monochrome app-root,
+html.kakaoracle-fenbi-guide-monochrome [data-v-app] {
+  background: #fff !important;
 }
 
 /* CSDN 一键美化：只处理结构和布局，不改变页面颜色。 */
