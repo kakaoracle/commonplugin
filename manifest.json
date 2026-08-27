@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "kakaoracle",
-  "version": "0.10.6",
+  "version": "0.13.0",
   "description": "kakaoracle：粉笔、CSDN、知乎页面增强与 JSON 美化工具。",
   "permissions": [
     "storage"
@@ -12,7 +12,8 @@
     "https://blog.csdn.net/*",
     "https://www.zhihu.com/*",
     "https://tiku.fenbi.com/*",
-    "https://ke.fenbi.com/*"
+    "https://ke.fenbi.com/*",
+    "https://keapi.fenbi.com/*"
   ],
   "background": {
     "service_worker": "background.js"
